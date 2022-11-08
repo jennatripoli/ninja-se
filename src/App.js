@@ -6,10 +6,10 @@ import { redrawCanvas } from './boundary/Boundary.js'
 import { Model } from './model/Model.js'
 import { move } from './controller/Controller.js'
 
-const upbutton = { position: "absolute", left: 530, top: 80 }
-const downbutton = { position: "absolute", left: 530, top: 160 }
-const leftbutton = { position: "absolute", left: 500, top: 120 }
-const rightbutton = { position: "absolute", left: 560, top: 120 }
+const upbutton = { position: "absolute", left: 100, top: 550 }
+const downbutton = { position: "absolute", left: 100, top: 650 }
+const leftbutton = { position: "absolute", left: 50, top: 600 }
+const rightbutton = { position: "absolute", left: 150, top: 600 }
 
 function App() {
   const [model, setModel] = React.useState(new Model(level1))
