@@ -55,32 +55,44 @@ export class Puzzle {
             for (let c = 0; c < this.nc; c++) {
                 if (this.cells[r][c].type == 'ninjase') {
                     // move ninja-se up
-                    if (direction == 'up' && r > 0) {
-                        this.cells[r][c].type = 'space'
-                        this.cells[r][c].color = 'white'
-                        this.cells[r - 1][c].type = 'ninjase'
-                        this.cells[r - 1][c].color = 'purple'
+                    if (direction == 'up' && r > 0 && this.cells[r - 1][c].type != 'wall') {
+                        if (this.cells[r - 1][c].type == 'door') {
+                        } else {
+                            this.cells[r][c].type = 'space'
+                            this.cells[r][c].color = 'white'
+                            this.cells[r - 1][c].type = 'ninjase'
+                            this.cells[r - 1][c].color = 'purple'
+                        }
 
                         // move ninja-se down
-                    } else if (direction == 'down' && r < this.nr - 1) {
-                        this.cells[r][c].type = 'space'
-                        this.cells[r][c].color = 'white'
-                        this.cells[r + 1][c].type = 'ninjase'
-                        this.cells[r + 1][c].color = 'purple'
+                    } else if (direction == 'down' && r < this.nr - 1 && this.cells[r + 1][c].type != 'wall') {
+                        if (this.cells[r + 1][c].type == 'door') {
+                        } else {
+                            this.cells[r][c].type = 'space'
+                            this.cells[r][c].color = 'white'
+                            this.cells[r + 1][c].type = 'ninjase'
+                            this.cells[r + 1][c].color = 'purple'
+                        }
 
                         // move ninja-se left
-                    } else if (direction == 'left' && c > 0) {
-                        this.cells[r][c].type = 'space'
-                        this.cells[r][c].color = 'white'
-                        this.cells[r][c - 1].type = 'ninjase'
-                        this.cells[r][c - 1].color = 'purple'
+                    } else if (direction == 'left' && c > 0 && this.cells[r][c - 1].type != 'wall') {
+                        if (this.cells[r][c - 1].type == 'door') {
+                        } else {
+                            this.cells[r][c].type = 'space'
+                            this.cells[r][c].color = 'white'
+                            this.cells[r][c - 1].type = 'ninjase'
+                            this.cells[r][c - 1].color = 'purple'
+                        }
 
                         // move ninja-se right
-                    } else if (direction == 'right' && c < this.nc - 1) {
-                        this.cells[r][c].type = 'space'
-                        this.cells[r][c].color = 'white'
-                        this.cells[r][c + 1].type = 'ninjase'
-                        this.cells[r][c + 1].color = 'purple'
+                    } else if (direction == 'right' && c < this.nc - 1 && this.cells[r][c + 1].type != 'wall') {
+                        if (this.cells[r][c + 1].type == 'door') {
+                        } else {
+                            this.cells[r][c].type = 'space'
+                            this.cells[r][c].color = 'white'
+                            this.cells[r][c + 1].type = 'ninjase'
+                            this.cells[r][c + 1].color = 'purple'
+                        }
                     }
                     
                     return
