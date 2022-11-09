@@ -28,6 +28,8 @@ function App() {
     let newModel = move(model, direction)
     setModel(newModel)
     redrawCanvas(newModel, canvasRef.current)
+
+    //console.log(model.puzzle.ninjase.moves)
   }
 
   return (

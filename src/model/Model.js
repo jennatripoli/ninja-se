@@ -67,11 +67,13 @@ export class Puzzle {
                 if (this.ninjase.key == newcell.color) {
                     newcell.type = 'doorunlocked'
                     this.ninjase.key = ''
+                    this.ninjase.moves += 1
                 }
             } else if (newcell.type == 'key') {
                 let tempkey = this.ninjase.key
                 this.ninjase.key = newcell.color
                 this.ninjase.row -= 1
+                this.ninjase.moves += 1
 
                 if (tempkey != '') {
                     this.cells[r - 1][c].type = 'key'
@@ -80,7 +82,10 @@ export class Puzzle {
                     this.cells[r - 1][c].type = 'space'
                     this.cells[r - 1][c].color = 'white'
                 }
-            } else this.ninjase.row -= 1
+            } else {
+                this.ninjase.row -= 1
+                this.ninjase.moves += 1
+            }
 
             // move ninja-se down
         } else if (direction == 'down' && r < this.nr - 1 && this.cells[r + 1][c].type != 'wall') {
@@ -90,11 +95,13 @@ export class Puzzle {
                 if (this.ninjase.key == newcell.color) {
                     newcell.type = 'doorunlocked'
                     this.ninjase.key = ''
+                    this.ninjase.moves += 1
                 }
             } else if (newcell.type == 'key') {
                 let tempkey = this.ninjase.key
                 this.ninjase.key = newcell.color
                 this.ninjase.row += 1
+                this.ninjase.moves += 1
 
                 if (tempkey != '') {
                     this.cells[r + 1][c].type = 'key'
@@ -103,7 +110,10 @@ export class Puzzle {
                     this.cells[r + 1][c].type = 'space'
                     this.cells[r + 1][c].color = 'white'
                 }
-            } else this.ninjase.row += 1
+            } else { 
+                this.ninjase.row += 1
+                this.ninjase.moves += 1
+            }
 
             // move ninja-se left
         } else if (direction == 'left' && c > 0 && this.cells[r][c - 1].type != 'wall') {
@@ -113,11 +123,13 @@ export class Puzzle {
                 if (this.ninjase.key == newcell.color) {
                     newcell.type = 'doorunlocked'
                     this.ninjase.key = ''
+                    this.ninjase.moves += 1
                 }
             } else if (this.cells[r][c - 1].type == 'key') {
                 let tempkey = this.ninjase.key
                 this.ninjase.key = newcell.color
                 this.ninjase.column -= 1
+                this.ninjase.moves += 1
 
                 if (tempkey != '') {
                     this.cells[r][c - 1].type = 'key'
@@ -126,7 +138,10 @@ export class Puzzle {
                     this.cells[r][c - 1].type = 'space'
                     this.cells[r][c - 1].color = 'white'
                 }
-            } else this.ninjase.column -= 1
+            } else {
+                this.ninjase.column -= 1
+                this.ninjase.moves += 1
+            }
 
             // move ninja-se right
         } else if (direction == 'right' && c < this.nc - 1 && this.cells[r][c + 1].type != 'wall') {
@@ -136,11 +151,13 @@ export class Puzzle {
                 if (this.ninjase.key == newcell.color) {
                     newcell.type = 'doorunlocked'
                     this.ninjase.key = ''
+                    this.ninjase.moves += 1
                 }
             } else if (this.cells[r][c + 1].type == 'key') {
                 let tempkey = this.ninjase.key
                 this.ninjase.key = newcell.color
                 this.ninjase.column += 1
+                this.ninjase.moves += 1
 
                 if (tempkey != '') {
                     this.cells[r][c + 1].type = 'key'
@@ -149,7 +166,10 @@ export class Puzzle {
                     this.cells[r][c + 1].type = 'space'
                     this.cells[r][c + 1].color = 'white'
                 }
-            } else this.ninjase.column += 1
+            } else {
+                this.ninjase.column += 1
+                this.ninjase.moves += 1
+            }
         }
     }
 }

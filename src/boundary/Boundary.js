@@ -21,6 +21,9 @@ export function redrawCanvas(model, canvasObj) {
     const ctx = canvasObj.getContext('2d')
     ctx.clearRect(0, 0, canvasObj.width, canvasObj.height)
 
+    ctx.font = '48px serif';
+    ctx.fillText('Move Count:' + model.puzzle.ninjase.moves, 50, 700);
+
     let nr = model.puzzle.nr
     let nc = model.puzzle.nc
 
