@@ -24,6 +24,10 @@ export function redrawCanvas(model, canvasObj) {
     ctx.fillStyle = 'black'
     ctx.fillText('Move Count:' + model.puzzle.ninjase.moves, 50, 700);
 
+    if (model.puzzle.doors == model.puzzle.doorsunlocked) {
+        ctx.fillText('CONGRATULATIONS', 10, 500);
+    }
+
     let nr = model.puzzle.nr
     let nc = model.puzzle.nc
 

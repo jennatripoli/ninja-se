@@ -27,6 +27,9 @@ export class Puzzle {
         this.nk = nk
         this.ninjase = ninjase
 
+        this.doors = 0
+        this.doorsunlocked = 0
+
         this.cells = []
         for (let r = 0; r < nr; r++) {
             this.cells[r] = [];
@@ -39,7 +42,10 @@ export class Puzzle {
 
                     // cell is a door
                     for (let d = 0; d < nd.length; d++) {
-                        if (nd[d].row == r && nd[d].column == c) this.cells[r][c] = new Cell(r, c, 'door', nd[d].color)
+                        if (nd[d].row == r && nd[d].column == c) { 
+                            this.cells[r][c] = new Cell(r, c, 'door', nd[d].color)
+                            this.doors++
+                        }
                     }
 
                     // cell is a key
@@ -65,7 +71,8 @@ export class Puzzle {
                     this.cells[r - 1][c].type = 'doorunlocked'
                     this.cells[r - 1][c].color = 'white'
                     this.ninjase.key = ''
-                    this.ninjase.moves += 1
+                    this.ninjase.moves++
+                    this.doorsunlocked++
                 }
             /*} else if (this.cells[r - 1][c].type == 'key') {
                 let tempkey = this.ninjase.key
@@ -81,8 +88,8 @@ export class Puzzle {
                     this.cells[r - 1][c].color = 'white'
                 }*/
             } else {
-                this.ninjase.row -= 1
-                this.ninjase.moves += 1
+                this.ninjase.row--
+                this.ninjase.moves++
             }
 
             // move ninja-se down
@@ -92,7 +99,8 @@ export class Puzzle {
                     this.cells[r + 1][c].type = 'doorunlocked'
                     this.cells[r + 1][c].color = 'white'
                     this.ninjase.key = ''
-                    this.ninjase.moves += 1
+                    this.ninjase.moves++
+                    this.doorsunlocked++
                 }
             /*} else if (this.cells[r + 1][c].type == 'key') {
                 let tempkey = this.ninjase.key
@@ -108,8 +116,8 @@ export class Puzzle {
                     this.cells[r + 1][c].color = 'white'
                 }*/
             } else {
-                this.ninjase.row += 1
-                this.ninjase.moves += 1
+                this.ninjase.row++
+                this.ninjase.moves++
             }
 
             // move ninja-se left
@@ -119,7 +127,8 @@ export class Puzzle {
                     this.cells[r][c - 1].type = 'doorunlocked'
                     this.cells[r][c - 1].color = 'white'
                     this.ninjase.key = ''
-                    this.ninjase.moves += 1
+                    this.ninjase.moves++
+                    this.doorsunlocked++
                 }
             /*} else if (this.cells[r][c - 1].type == 'key') {
                 let tempkey = this.ninjase.key
@@ -135,8 +144,8 @@ export class Puzzle {
                     this.cells[r][c - 1].color = 'white'
                 }*/
             } else {
-                this.ninjase.column -= 1
-                this.ninjase.moves += 1
+                this.ninjase.column--
+                this.ninjase.moves++
             }
 
             // move ninja-se right
@@ -146,7 +155,8 @@ export class Puzzle {
                     this.cells[r][c + 1].type = 'doorunlocked'
                     this.cells[r][c + 1].type = 'white'
                     this.ninjase.key = ''
-                    this.ninjase.moves += 1
+                    this.ninjase.moves++
+                    this.doorsunlocked++
                 }
             /*} else if (this.cells[r][c + 1].type == 'key') {
                 let tempkey = this.ninjase.key
@@ -162,8 +172,8 @@ export class Puzzle {
                     this.cells[r][c + 1].color = 'white'
                 }*/
             } else {
-                this.ninjase.column += 1
-                this.ninjase.moves += 1
+                this.ninjase.column++
+                this.ninjase.moves++
             }
         }
     }
