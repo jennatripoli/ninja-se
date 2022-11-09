@@ -58,20 +58,18 @@ export class Puzzle {
     move(direction) {
         let r = this.ninjase.row
         let c = this.ninjase.column
-        let currentcell = this.cells[r][c]
 
         if (direction == 'up' && r > 0 && this.cells[r - 1][c].type != 'wall') {
-            let newcell = this.cells[r - 1][c]
-
-            if (newcell.type == 'door') {
-                if (this.ninjase.key == newcell.color) {
-                    newcell.type = 'doorunlocked'
+            if (this.cells[r - 1][c].type == 'door') {
+                if (this.ninjase.key == this.cells[r - 1][c].color) {
+                    this.cells[r - 1][c].type = 'doorunlocked'
+                    this.cells[r - 1][c].color = 'white'
                     this.ninjase.key = ''
                     this.ninjase.moves += 1
                 }
-            } else if (newcell.type == 'key') {
+            } else if (this.cells[r - 1][c].type == 'key') {
                 let tempkey = this.ninjase.key
-                this.ninjase.key = newcell.color
+                this.ninjase.key = this.cells[r - 1][c].color
                 this.ninjase.row -= 1
                 this.ninjase.moves += 1
 
@@ -89,17 +87,16 @@ export class Puzzle {
 
             // move ninja-se down
         } else if (direction == 'down' && r < this.nr - 1 && this.cells[r + 1][c].type != 'wall') {
-            let newcell = this.cells[r + 1][c]
-
-            if (newcell.type == 'door') {
-                if (this.ninjase.key == newcell.color) {
-                    newcell.type = 'doorunlocked'
+            if (this.cells[r + 1][c].type == 'door') {
+                if (this.ninjase.key == this.cells[r + 1][c].color) {
+                    this.cells[r + 1][c].type = 'doorunlocked'
+                    this.cells[r + 1][c].color = 'white'
                     this.ninjase.key = ''
                     this.ninjase.moves += 1
                 }
-            } else if (newcell.type == 'key') {
+            } else if (this.cells[r + 1][c].type == 'key') {
                 let tempkey = this.ninjase.key
-                this.ninjase.key = newcell.color
+                this.ninjase.key = this.cells[r + 1][c].color
                 this.ninjase.row += 1
                 this.ninjase.moves += 1
 
@@ -110,24 +107,23 @@ export class Puzzle {
                     this.cells[r + 1][c].type = 'space'
                     this.cells[r + 1][c].color = 'white'
                 }
-            } else { 
+            } else {
                 this.ninjase.row += 1
                 this.ninjase.moves += 1
             }
 
             // move ninja-se left
         } else if (direction == 'left' && c > 0 && this.cells[r][c - 1].type != 'wall') {
-            let newcell = this.cells[r][c - 1]
-
             if (this.cells[r][c - 1].type == 'door') {
-                if (this.ninjase.key == newcell.color) {
-                    newcell.type = 'doorunlocked'
+                if (this.ninjase.key == this.cells[r][c - 1].color) {
+                    this.cells[r][c - 1].type = 'doorunlocked'
+                    this.cells[r][c - 1].color = 'white'
                     this.ninjase.key = ''
                     this.ninjase.moves += 1
                 }
             } else if (this.cells[r][c - 1].type == 'key') {
                 let tempkey = this.ninjase.key
-                this.ninjase.key = newcell.color
+                this.ninjase.key = this.cells[r][c - 1].color
                 this.ninjase.column -= 1
                 this.ninjase.moves += 1
 
@@ -145,17 +141,16 @@ export class Puzzle {
 
             // move ninja-se right
         } else if (direction == 'right' && c < this.nc - 1 && this.cells[r][c + 1].type != 'wall') {
-            let newcell = this.cells[r][c + 1]
-
             if (this.cells[r][c + 1].type == 'door') {
-                if (this.ninjase.key == newcell.color) {
-                    newcell.type = 'doorunlocked'
+                if (this.ninjase.key == this.cells[r][c + 1].color) {
+                    this.cells[r][c + 1].type = 'doorunlocked'
+                    this.cells[r][c + 1].type = 'white'
                     this.ninjase.key = ''
                     this.ninjase.moves += 1
                 }
             } else if (this.cells[r][c + 1].type == 'key') {
                 let tempkey = this.ninjase.key
-                this.ninjase.key = newcell.color
+                this.ninjase.key = this.cells[r][c + 1].color
                 this.ninjase.column += 1
                 this.ninjase.moves += 1
 
@@ -192,7 +187,4 @@ export class Model {
 
     // move ninja-se
     move(direction) { this.puzzle.move(direction) }
-
-    // create new model on demand from existing one to trigger updates
-    // copy() { return new Model(this.level) }
 }

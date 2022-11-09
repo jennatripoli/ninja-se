@@ -15,13 +15,13 @@ export function computeSquare(cell) {
     return new Square(BOXSIZE * cell.column + OFFSET, BOXSIZE * cell.row + OFFSET, BOXSIZE - 2 * OFFSET)
 }
 
-
 // redraw entire canvas from model
 export function redrawCanvas(model, canvasObj) {
     const ctx = canvasObj.getContext('2d')
     ctx.clearRect(0, 0, canvasObj.width, canvasObj.height)
 
     ctx.font = '48px serif';
+    ctx.fillStyle = 'black'
     ctx.fillText('Move Count:' + model.puzzle.ninjase.moves, 50, 700);
 
     let nr = model.puzzle.nr
@@ -55,8 +55,7 @@ export function redrawCanvas(model, canvasObj) {
 
             // draw outline on cells
             ctx.fillStyle = 'black'
-            ctx.rect(sq.x, sq.y, sq.size, sq.size)
-            ctx.stroke()
+            ctx.strokeRect(sq.x, sq.y, sq.size, sq.size)
         }
     }
 }
