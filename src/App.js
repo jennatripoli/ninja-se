@@ -4,7 +4,7 @@ import { level2 } from './model/Levels.js'
 import { level3 } from './model/Levels.js'
 import { redrawCanvas } from './boundary/Boundary.js'
 import { Model } from './model/Model.js'
-import { move } from './controller/Controller.js'
+import { move, key } from './controller/Controller.js'
 
 const upbutton = { position: "absolute", left: 100, top: 550 }
 const downbutton = { position: "absolute", left: 100, top: 650 }
@@ -37,10 +37,17 @@ function App() {
     redrawCanvas(newModel, canvasRef.current)
   }
 
+  const keyController = () => {
+    let newModel = key(model)
+    setModel(newModel)
+    redrawCanvas(newModel, canvasRef.current)
+  }
+
   // set level that is currently being played (level1, level2, level3)
   const setLevel = (level) => {
     let newModel = new Model(level)
     setModel(newModel)
+    redrawCanvas(newModel, canvasRef.current)
     currentLevel = level
   }
 
@@ -56,6 +63,7 @@ function App() {
       <button style={downbutton} onClick={(e) => moveController('down')}>v</button>
       <button style={leftbutton} onClick={(e) => moveController('left')}>&lt;</button>
       <button style={rightbutton} onClick={(e) => moveController('right')}>&gt;</button>
+      <button style={keybutton} onClick={(e) => keyController()}>Pick Up Key</button>
 
       <button style={level1button} onClick={(e) => setLevel(level1)}>Level 1</button>
       <button style={level2button} onClick={(e) => setLevel(level2)}>Level 2</button>

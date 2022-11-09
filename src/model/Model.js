@@ -67,7 +67,7 @@ export class Puzzle {
                     this.ninjase.key = ''
                     this.ninjase.moves += 1
                 }
-            } else if (this.cells[r - 1][c].type == 'key') {
+            /*} else if (this.cells[r - 1][c].type == 'key') {
                 let tempkey = this.ninjase.key
                 this.ninjase.key = this.cells[r - 1][c].color
                 this.ninjase.row -= 1
@@ -79,7 +79,7 @@ export class Puzzle {
                 } else {
                     this.cells[r - 1][c].type = 'space'
                     this.cells[r - 1][c].color = 'white'
-                }
+                }*/
             } else {
                 this.ninjase.row -= 1
                 this.ninjase.moves += 1
@@ -94,7 +94,7 @@ export class Puzzle {
                     this.ninjase.key = ''
                     this.ninjase.moves += 1
                 }
-            } else if (this.cells[r + 1][c].type == 'key') {
+            /*} else if (this.cells[r + 1][c].type == 'key') {
                 let tempkey = this.ninjase.key
                 this.ninjase.key = this.cells[r + 1][c].color
                 this.ninjase.row += 1
@@ -106,7 +106,7 @@ export class Puzzle {
                 } else {
                     this.cells[r + 1][c].type = 'space'
                     this.cells[r + 1][c].color = 'white'
-                }
+                }*/
             } else {
                 this.ninjase.row += 1
                 this.ninjase.moves += 1
@@ -121,7 +121,7 @@ export class Puzzle {
                     this.ninjase.key = ''
                     this.ninjase.moves += 1
                 }
-            } else if (this.cells[r][c - 1].type == 'key') {
+            /*} else if (this.cells[r][c - 1].type == 'key') {
                 let tempkey = this.ninjase.key
                 this.ninjase.key = this.cells[r][c - 1].color
                 this.ninjase.column -= 1
@@ -133,7 +133,7 @@ export class Puzzle {
                 } else {
                     this.cells[r][c - 1].type = 'space'
                     this.cells[r][c - 1].color = 'white'
-                }
+                }*/
             } else {
                 this.ninjase.column -= 1
                 this.ninjase.moves += 1
@@ -148,7 +148,7 @@ export class Puzzle {
                     this.ninjase.key = ''
                     this.ninjase.moves += 1
                 }
-            } else if (this.cells[r][c + 1].type == 'key') {
+            /*} else if (this.cells[r][c + 1].type == 'key') {
                 let tempkey = this.ninjase.key
                 this.ninjase.key = this.cells[r][c + 1].color
                 this.ninjase.column += 1
@@ -160,10 +160,30 @@ export class Puzzle {
                 } else {
                     this.cells[r][c + 1].type = 'space'
                     this.cells[r][c + 1].color = 'white'
-                }
+                }*/
             } else {
                 this.ninjase.column += 1
                 this.ninjase.moves += 1
+            }
+        }
+    }
+
+    key() {
+        for (let r = 0; r < this.nr; r++) {
+            for (let c = 0; c < this.nc; c++) {
+                if (this.cells[r][c].type == 'key' && this.ninjase.row == r && this.ninjase.column == c) {
+                    let tempkey = this.ninjase.key
+                    this.ninjase.key = this.cells[r][c].color
+                    this.ninjase.moves += 1
+
+                    if (tempkey != '') {
+                        this.cells[r][c].type = 'key'
+                        this.cells[r][c].color = tempkey
+                    } else {
+                        this.cells[r][c].type = 'space'
+                        this.cells[r][c].color = 'white'
+                    }
+                }
             }
         }
     }
@@ -187,4 +207,7 @@ export class Model {
 
     // move ninja-se
     move(direction) { this.puzzle.move(direction) }
+
+    // pick up key
+    key() { this.puzzle.key() }
 }
