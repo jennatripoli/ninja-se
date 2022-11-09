@@ -28,29 +28,30 @@ export function redrawCanvas(model, canvasObj) {
         for (let c = 0; c < nc; c++) {
             let cell = model.puzzle.cells[r][c]
             let sq = computeSquare(cell)
-            ctx.fillStyle = cell.color
 
             // color in cell based on cell type
-            if (cell.type == 'ninjase') {
+            if (model.puzzle.ninjase.row == r && model.puzzle.ninjase.column == c) {
+                ctx.fillStyle = 'purple'
                 ctx.fillRect(sq.x, sq.y, sq.size, sq.size)
                 if (model.puzzle.ninjase.key != '') {
                     ctx.fillStyle = model.puzzle.ninjase.key
                     ctx.fillRect(sq.x + sq.size * 0.25, sq.y + sq.size * 0.25, sq.size * 0.5, sq.size * 0.5)
                 }
-            } else if (cell.type == 'wall') {
-                ctx.fillRect(sq.x, sq.y, sq.size, sq.size)
-            } else if (cell.type == 'space') {
+            } else if (cell.type == 'wall' || cell.type == 'space' || cell.type == 'doorunlocked') {
+                ctx.fillStyle = cell.color
                 ctx.fillRect(sq.x, sq.y, sq.size, sq.size)
             } else if (cell.type == 'key') {
+                ctx.fillStyle = cell.color
                 ctx.fillRect(sq.x + sq.size * 0.25, sq.y + sq.size * 0.25, sq.size * 0.5, sq.size * 0.5)
             } else if (cell.type == 'door') {
+                ctx.fillStyle = cell.color
                 ctx.fillRect(sq.x, sq.y, sq.size, sq.size)
                 ctx.fillStyle = 'white'
                 ctx.fillRect(sq.x + sq.size * 0.25, sq.y + sq.size * 0.25, sq.size * 0.5, sq.size * 0.5)
             }
 
             // draw outline on cells
-            //ctx.fillStyle = 'black'
+            ctx.fillStyle = 'black'
             ctx.rect(sq.x, sq.y, sq.size, sq.size)
             ctx.stroke()
         }
