@@ -71,22 +71,10 @@ export class Puzzle {
                     this.cells[r - 1][c].type = 'doorunlocked'
                     this.cells[r - 1][c].color = 'white'
                     this.ninjase.key = ''
+                    this.ninjase.row--
                     this.ninjase.moves++
                     this.doorsunlocked++
                 }
-            /*} else if (this.cells[r - 1][c].type == 'key') {
-                let tempkey = this.ninjase.key
-                this.ninjase.key = this.cells[r - 1][c].color
-                this.ninjase.row -= 1
-                this.ninjase.moves += 1
-
-                if (tempkey != '') {
-                    this.cells[r - 1][c].type = 'key'
-                    this.cells[r - 1][c].color = tempkey
-                } else {
-                    this.cells[r - 1][c].type = 'space'
-                    this.cells[r - 1][c].color = 'white'
-                }*/
             } else {
                 this.ninjase.row--
                 this.ninjase.moves++
@@ -99,22 +87,10 @@ export class Puzzle {
                     this.cells[r + 1][c].type = 'doorunlocked'
                     this.cells[r + 1][c].color = 'white'
                     this.ninjase.key = ''
+                    this.ninjase.row++
                     this.ninjase.moves++
                     this.doorsunlocked++
                 }
-            /*} else if (this.cells[r + 1][c].type == 'key') {
-                let tempkey = this.ninjase.key
-                this.ninjase.key = this.cells[r + 1][c].color
-                this.ninjase.row += 1
-                this.ninjase.moves += 1
-
-                if (tempkey != '') {
-                    this.cells[r + 1][c].type = 'key'
-                    this.cells[r + 1][c].color = tempkey
-                } else {
-                    this.cells[r + 1][c].type = 'space'
-                    this.cells[r + 1][c].color = 'white'
-                }*/
             } else {
                 this.ninjase.row++
                 this.ninjase.moves++
@@ -127,22 +103,10 @@ export class Puzzle {
                     this.cells[r][c - 1].type = 'doorunlocked'
                     this.cells[r][c - 1].color = 'white'
                     this.ninjase.key = ''
+                    this.ninjase.column--
                     this.ninjase.moves++
                     this.doorsunlocked++
                 }
-            /*} else if (this.cells[r][c - 1].type == 'key') {
-                let tempkey = this.ninjase.key
-                this.ninjase.key = this.cells[r][c - 1].color
-                this.ninjase.column -= 1
-                this.ninjase.moves += 1
-
-                if (tempkey != '') {
-                    this.cells[r][c - 1].type = 'key'
-                    this.cells[r][c - 1].color = tempkey
-                } else {
-                    this.cells[r][c - 1].type = 'space'
-                    this.cells[r][c - 1].color = 'white'
-                }*/
             } else {
                 this.ninjase.column--
                 this.ninjase.moves++
@@ -155,22 +119,10 @@ export class Puzzle {
                     this.cells[r][c + 1].type = 'doorunlocked'
                     this.cells[r][c + 1].type = 'white'
                     this.ninjase.key = ''
+                    this.ninjase.column++
                     this.ninjase.moves++
                     this.doorsunlocked++
                 }
-            /*} else if (this.cells[r][c + 1].type == 'key') {
-                let tempkey = this.ninjase.key
-                this.ninjase.key = this.cells[r][c + 1].color
-                this.ninjase.column += 1
-                this.ninjase.moves += 1
-
-                if (tempkey != '') {
-                    this.cells[r][c + 1].type = 'key'
-                    this.cells[r][c + 1].color = tempkey
-                } else {
-                    this.cells[r][c + 1].type = 'space'
-                    this.cells[r][c + 1].color = 'white'
-                }*/
             } else {
                 this.ninjase.column++
                 this.ninjase.moves++
@@ -220,4 +172,6 @@ export class Model {
 
     // pick up key
     key() { this.puzzle.key() }
+
+    getMoves() { return this.ninjase.moves }
 }

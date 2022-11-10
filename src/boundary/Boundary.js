@@ -1,6 +1,8 @@
 // scaling constants for canvas
-var BOXSIZE = 100;
-const OFFSET = 8;
+var BOXSIZE = 80;
+const OFFSET = 5;
+
+let winMoves = 0
 
 export class Square {
     // create a square with position and size
@@ -20,16 +22,14 @@ export function redrawCanvas(model, canvasObj) {
     const ctx = canvasObj.getContext('2d')
     ctx.clearRect(0, 0, canvasObj.width, canvasObj.height)
 
-    ctx.font = '48px serif';
-    ctx.fillStyle = 'black'
-    ctx.fillText('Move Count:' + model.puzzle.ninjase.moves, 50, 700);
-
-    if (model.puzzle.doors == model.puzzle.doorsunlocked) {
-        ctx.fillText('CONGRATULATIONS', 10, 500);
-    }
-
     let nr = model.puzzle.nr
     let nc = model.puzzle.nc
+
+    let offsetX = (8 - nc) / 2.2 * BOXSIZE + OFFSET
+    let offsetY = (8 - nr) / 2.2 * BOXSIZE + OFFSET
+
+    if (nc == 8) offsetX -= OFFSET
+    if (nr == 8) offsetY -= OFFSET
 
     for (let r = 0; r < nr; r++) {
         for (let c = 0; c < nc; c++) {
@@ -39,27 +39,58 @@ export function redrawCanvas(model, canvasObj) {
             // color in cell based on cell type
             if (model.puzzle.ninjase.row == r && model.puzzle.ninjase.column == c) {
                 ctx.fillStyle = 'purple'
-                ctx.fillRect(sq.x, sq.y, sq.size, sq.size)
+                ctx.fillRect(sq.x + offsetX, sq.y + offsetY, sq.size, sq.size)
                 if (model.puzzle.ninjase.key != '') {
                     ctx.fillStyle = model.puzzle.ninjase.key
-                    ctx.fillRect(sq.x + sq.size * 0.25, sq.y + sq.size * 0.25, sq.size * 0.5, sq.size * 0.5)
+                    ctx.fillRect(sq.x + offsetX + sq.size * 0.25, sq.y + offsetY + sq.size * 0.25, sq.size * 0.5, sq.size * 0.5)
                 }
             } else if (cell.type == 'wall' || cell.type == 'space' || cell.type == 'doorunlocked') {
                 ctx.fillStyle = cell.color
-                ctx.fillRect(sq.x, sq.y, sq.size, sq.size)
+                ctx.fillRect(sq.x + offsetX, sq.y + offsetY, sq.size, sq.size)
             } else if (cell.type == 'key') {
+                ctx.fillStyle = 'white'
+                ctx.fillRect(sq.x + offsetX, sq.y + offsetY, sq.size, sq.size)
                 ctx.fillStyle = cell.color
-                ctx.fillRect(sq.x + sq.size * 0.25, sq.y + sq.size * 0.25, sq.size * 0.5, sq.size * 0.5)
+                ctx.fillRect(sq.x + offsetX + sq.size * 0.25, sq.y + offsetY + sq.size * 0.25, sq.size * 0.5, sq.size * 0.5)
             } else if (cell.type == 'door') {
                 ctx.fillStyle = cell.color
-                ctx.fillRect(sq.x, sq.y, sq.size, sq.size)
+                ctx.fillRect(sq.x + offsetX, sq.y + offsetY, sq.size, sq.size)
                 ctx.fillStyle = 'white'
-                ctx.fillRect(sq.x + sq.size * 0.25, sq.y + sq.size * 0.25, sq.size * 0.5, sq.size * 0.5)
+                ctx.fillRect(sq.x + offsetX + sq.size * 0.25, sq.y + offsetY + sq.size * 0.25, sq.size * 0.5, sq.size * 0.5)
             }
 
             // draw outline on cells
             ctx.fillStyle = 'black'
-            ctx.strokeRect(sq.x, sq.y, sq.size, sq.size)
+            ctx.strokeRect(sq.x + offsetX, sq.y + offsetY, sq.size, sq.size)
         }
+    }
+
+    if (model.puzzle.doors == model.puzzle.doorsunlocked) {
+        if (winMoves == 0) winMoves = model.puzzle.ninjase.moves
+
+        ctx.fillStyle = 'darkgrey'
+        ctx.fillRect(0, 0, canvasObj.width, canvasObj.height)
+        
+        ctx.fillStyle = 'black'
+        ctx.font = 'bold 48px sans-serif'
+        ctx.fillText('CONGRATULATIONS!', 70, 300);
+        ctx.font = '30px sans-serif'
+        ctx.fillText('You solved this level in ' + winMoves + " moves.", 95, 340);
+    } 
+}
+
+export function redrawCanvas2(model, canvasObj) {
+    const ctx = canvasObj.getContext('2d')
+    ctx.clearRect(0, 0, canvasObj.width, canvasObj.height)
+
+    //ctx.fillStyle = 'black'
+    //ctx.font = '10px sansserif'
+    //ctx.fillText('Move Count: ' + model.puzzle.ninjase.moves, 0, 0);
+
+    if (model.puzzle.doors != model.puzzle.doorsunlocked) {
+        //ctx.fillRect(0, 0, canvasObj.width, canvasObj.height)
+        ctx.font = '20px sans-serif'
+        ctx.fillStyle = 'purple'
+        ctx.fillText(winMoves , 0, 0);
     }
 }
