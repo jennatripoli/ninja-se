@@ -15,7 +15,7 @@ const level2button = { position: "absolute", left: 80, bottom: 15, fontSize:"30p
 const level3button = { position: "absolute", right: 20, bottom: 15, fontSize:"30pt" }
 const resetbutton = { position: "absolute", left: 1200, top: 340, width: 200, height: 50, fontSize:"20pt", fontWeight:"bold", textAlign: "center" }
 
-const movecount = { position: "absolute", left: 750, top: 200, width: 250, height: 50, background: "white", outline: "1px solid black" }
+const movecount = { position: "absolute", left: 750, top: 200, width: 250, height: 50, background: "white", outline: "1px solid black", background: "#efefef" }
 const movecounttext = { position: "absolute", left: 0, top: 6, width: 250, fontSize: "20pt", fontWeight: "bold", textAlign: "center" }
 const keybutton = { position: "absolute", left: 750, top: 270, width: 250, height: 50, fontSize:"20pt", fontWeight:"bold", textAlign: "center" }
 
@@ -35,34 +35,28 @@ function App() {
   const [redraw, forceRedraw] = React.useState(0)
 
   // initial rendering is performed, and when model changes, it is re-rendered
-  React.useEffect(() => {
-    redrawCanvas(model, canvasRef.current)
-  }, [model, redraw])  // arguments that determine when to refresh
+  React.useEffect(() => {redrawCanvas(model, canvasRef.current)}, [model, redraw])
 
   // move ninja-se on screen and request redraw
   const moveController = (direction) => {
     let newModel = move(model, direction)
     setModel(newModel)
-    redrawCanvas(newModel, canvasRef.current)
-    //console.log(model.puzzle.ninjase.moves)
+    forceRedraw(redraw + 1)
   }
 
   const keyController = () => {
     let newModel = key(model)
     setModel(newModel)
-    redrawCanvas(newModel, canvasRef.current)
-    //console.log(model.puzzle.ninjase.moves)
+    forceRedraw(redraw + 1)
   }
 
   // set level that is currently being played (level1, level2, level3)
   const setLevel = (level) => {
     let newModel = new Model(level)
     setModel(newModel)
-    redrawCanvas(newModel, canvasRef.current)
+    forceRedraw(redraw + 1)
     currentLevel = level
   }
-
-  console.log(model.puzzle.ninjase.moves)
 
   return (
     <main>
@@ -78,7 +72,7 @@ function App() {
             <button style={level3button} onClick={(e) => setLevel(level3)}>3</button>
           </div>
 
-          <div style={movecount}><label id="movecount" style={movecounttext}>{'Current Moves: '+ model.puzzle.ninjase.moves}</label></div>
+          <div style={movecount}><label style={movecounttext}>{'Current Moves: '+ model.puzzle.ninjase.moves}</label></div>
 
           <button style={keybutton} onClick={(e) => keyController()}>Pick Up Key</button>
 
