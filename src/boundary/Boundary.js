@@ -78,19 +78,3 @@ export function redrawCanvas(model, canvasObj) {
         ctx.fillText('You solved this level in ' + winMoves + " moves.", 95, 340);
     } 
 }
-
-export function redrawCanvas2(model, canvasObj) {
-    const ctx = canvasObj.getContext('2d')
-    ctx.clearRect(0, 0, canvasObj.width, canvasObj.height)
-
-    //ctx.fillStyle = 'black'
-    //ctx.font = '10px sansserif'
-    //ctx.fillText('Move Count: ' + model.puzzle.ninjase.moves, 0, 0);
-
-    if (model.puzzle.doors != model.puzzle.doorsunlocked) {
-        //ctx.fillRect(0, 0, canvasObj.width, canvasObj.height)
-        ctx.font = '20px sans-serif'
-        ctx.fillStyle = 'purple'
-        ctx.fillText(winMoves , 0, 0);
-    }
-}
