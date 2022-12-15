@@ -76,5 +76,6 @@ export function redrawCanvas(model, canvasObj) {
         ctx.fillText('CONGRATULATIONS!', 70, 300);
         ctx.font = '30px sans-serif'
         ctx.fillText('You solved this level in ' + winMoves + " moves.", 95, 340);
+        winMoves = 0
     } 
 }
