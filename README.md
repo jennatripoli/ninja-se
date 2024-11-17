@@ -1,2 +1,9 @@
 # Ninja-Se
-Ninja-Se is a puzzle game that involves moving around the board to unlock doors and escape. The player is represented by a purple square and can move from one cell to another. Cells that are colored black are walls and prevent movement. Some cells have keys in them, which are shown as a small colored square within a cell. There is a corresponding locked wall (with the same color and missing color in the center of the cell) for each key. If the player is in a cell with a key, they can pick it up. Only one cell can be held at a time, so requesting to pick up a key if one is already held will result in the previously held key being dropped. The player must unlock all locked doors to escape the room.
+
+Ninja-Se is a puzzle game built using JavaScript and React, using a Model-Boundary-Controller architecture. It features a Canvas object for rendering and JSON-based board configurations for flexible gameplay setup.
+
+The player is represented as a purple square and can move across the grid, except for black cells, which represent walls and block movement. Some cells contain keys, displayed as small colored squares. Each key corresponds to a locked door of the same color, identifiable by its matching color and a missing center in the cell design. Players can pick up a key when moving into a cell containing one. Only one key can be carried at a time; attempting to pick up a new key while already holding one results in the previously held key being dropped. The goal is to collect keys, unlock all corresponding doors, and navigate through the board to escape the room.
+
+Visit https://jennatripoli.github.io/ninja-se to play.
+
+Fall 2022 - CS 3733 (Software Engineering) at Worcester Polytechnic Institute
